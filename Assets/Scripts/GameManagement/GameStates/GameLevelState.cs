@@ -3,6 +3,7 @@ using Assets.Scripts.GameLevels;
 using Assets.Scripts.UI;
 using Assets.Scripts.UI.ViewModels;
 using Assets.Scripts.UI.Views;
+using Zenject;
 
 namespace Assets.Scripts.GameManagement.GameStates
 {
@@ -10,6 +11,7 @@ namespace Assets.Scripts.GameManagement.GameStates
     {
         private GameScreenView _gameScreen;
 
+        [Inject]
         public GameLevelState(GameContext context) : base(context) { }
 
         protected override void EnterInternal()

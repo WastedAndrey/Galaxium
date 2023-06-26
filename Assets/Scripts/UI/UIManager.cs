@@ -18,18 +18,21 @@ namespace Assets.Scripts.UI
 
         private List<IView> _views = new List<IView>();
 
-        private void Awake()
+      /*  private void Awake()
         {
+            
             if (_instance == null)
                 Init();
             else
                 Destroy(this.gameObject);
+
+            DontDestroyOnLoad(this);
         }
         private void Init()
         {
             _instance = this;
             DontDestroyOnLoad(this.gameObject);
-        }
+        }*/
 
         public async Task<T> OpenWindow<T>(string viewPath, bool closePreviousWindow = false) where T : IView
         {

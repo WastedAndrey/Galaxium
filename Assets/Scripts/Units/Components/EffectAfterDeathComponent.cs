@@ -1,11 +1,14 @@
 ﻿
 using Assets.Scripts.ObjectManagement;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Units.Components
 {
     public class EffectAfterDeathComponent : UnitComponentBase
     {
+        [Inject]
+        private ObjectManager _objectManager;
         private GameObject _prefabEffect;
 
         public EffectAfterDeathComponent(UnitBase unit, UnitContext unitContext, GameObject prefab) : base(unit, unitContext)
@@ -27,7 +30,7 @@ namespace Assets.Scripts.Units.Components
         private void CreateEffect()
         {
             if (_prefabEffect != null)
-                ObjectManager.Instanse.InstantiatePrefab(_prefabEffect, _unit.Position);
+                _objectManager.InstantiatePrefab(_prefabEffect, _unit.Position);
         }
     }
 }

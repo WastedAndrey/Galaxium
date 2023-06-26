@@ -1,6 +1,8 @@
-﻿
-using Assets.Scripts.Units.Components;
+﻿using Assets.Scripts.Units.Components.CommandApplyers.Factories;
+using Assets.Scripts.Units.Components.Factories;
+using Assets.Scripts.Units.Missiles.Components.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Units.Missiles
 {
@@ -11,23 +13,46 @@ namespace Assets.Scripts.Units.Missiles
         [SerializeField]
         private float _lifetimeMax = 3;
 
+        [Inject]
+        private MissileCollisionFactory _missileCollisionFactory;
+        [Inject]
+        private LimitedTimeFactory _limitedTimeFactory;
+        [Inject]
+        private ConstantMoveFactory _constantMoveFactory;
+        [Inject]
+        private EffectAfterDeathFactory _effectAfterDeathFactory;
+        [Inject]
+        private DamageApplyerFactory _damageApplyerFactory;
+        [Inject]
+        private MovementApplyerFactory _movementApplyerFactory;
+        [Inject]
+        private TeamApplyerFactory _teamApplyerFactory;
+        [Inject]
+        private DieApplyerFactory _dieApplyerFactory;
+        [Inject]
+        private ReviveApplyerFactory _reviveApplyerFactory;
+        [Inject]
+        private DestroyApplyerFactory _destroyApplyerFactory;
+        [Inject]
+        private ResetApplyerFactory _resetApplyerFactory;
+
         public override void InitInternal(UnitBase unit, UnitContext unitContext)
         {
-            _components.Add(new MissileCollisionComponent(unit, unitContext));
-            _components.Add(new LimitedTimeComponent(unit, unitContext, _lifetimeMax));
-            _components.Add(new ConstantMoveComponent(unit, unitContext, Vector2.up));
-            _components.Add(new EffectAfterDeathComponent(unit, unitContext, _prefabExplosionEffect));
-            
-            
+            _components.Add(_missileCollisionFactory.Create(unit, unitContext));
+            _components.Add(_limitedTimeFactory.Create(unit, unitContext, _lifetimeMax));
+            _components.Add(_constantMoveFactory.Create(unit, unitContext, Vector2.up));
+            _components.Add(_effectAfterDeathFactory.Create(unit, unitContext, _prefabExplosionEffect));
+
+
 
             // Applyers
-            _components.Add(new DamageApplyerComponent(unit, unitContext));
-            _components.Add(new MovementApplyerComponent(unit, unitContext));
-            _components.Add(new TeamApplyerComponent(unit, unitContext));
-            _components.Add(new DieApplyerComponent(unit, unitContext));
-            _components.Add(new ReviveApplyerComponent(unit, unitContext));
-            _components.Add(new DestroyApplyerComponent(unit, unitContext));
-            _components.Add(new ResetApplyerComponent(unit, unitContext));
+            _components.Add(_damageApplyerFactory.Create(unit, unitContext));
+            _components.Add(_movementApplyerFactory.Create(unit, unitContext));
+            _components.Add(_teamApplyerFactory.Create(unit, unitContext));
+            _components.Add(_dieApplyerFactory.Create(unit, unitContext));
+            _components.Add(_reviveApplyerFactory.Create(unit, unitContext));
+            _components.Add(_destroyApplyerFactory.Create(unit, unitContext));
+            _components.Add(_resetApplyerFactory.Create(unit, unitContext));
         }
     }
 }

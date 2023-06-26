@@ -26,7 +26,7 @@ namespace Assets.Scripts.ObjectManagement
         public static ObjectPoolManager Instance { get => _instance; }
 
         private void Awake()
-        {
+        {/*
             if (_instance == null)
             {
                 _instance = this;
@@ -35,7 +35,7 @@ namespace Assets.Scripts.ObjectManagement
             else
             {
                 Destroy(this.gameObject);
-            }
+            }*/
 
             _pool = new Dictionary<ObjectPoolTag, ObjectPoolData>();
             InitFromPreset();

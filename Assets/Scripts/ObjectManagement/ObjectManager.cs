@@ -1,23 +1,13 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.ObjectManagement
 {
     public class ObjectManager : MonoBehaviour
     {
-        private static ObjectManager _instanse;
-        public static ObjectManager Instanse { get => _instanse; }
-
-        private void Awake()
-        {
-            if (_instanse == null)
-            {
-                _instanse = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-                Destroy(this.gameObject); 
-        }
+        [Inject]
+        DiContainer _diContainer;
 
         public T InstantiatePrefab<T>(T prefab) where T : UnityEngine.Object
         {

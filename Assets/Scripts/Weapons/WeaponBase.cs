@@ -1,16 +1,27 @@
 ﻿
 using Assets.Scripts.Units;
+using Assets.Scripts.Units.Missiles;
+using Assets.VisualEffects;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Weapons
 {
     public abstract class WeaponBase
     {
+        protected readonly MissileFactory _missileFactory;
+        protected readonly VisualEffectFactory _visualEffectFactory;
         protected WeaponSettings _settings;
-        protected UnitTeam _team;
         protected float _shootCooldown = 0;
 
-        public WeaponBase(WeaponSettings settings)
+        [Inject]
+        public WeaponBase(MissileFactory missileFactory, VisualEffectFactory visualEffectFactory)
+        {
+            _missileFactory = missileFactory;
+            _visualEffectFactory = visualEffectFactory;
+        }
+
+        public virtual void Init(WeaponSettings settings)
         {
             _settings = settings;
         }

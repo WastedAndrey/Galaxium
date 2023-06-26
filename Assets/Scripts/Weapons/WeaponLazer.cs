@@ -1,16 +1,17 @@
 ﻿
 using Assets.Scripts.General;
-using Assets.Scripts.ObjectManagement;
 using Assets.Scripts.Units;
+using Assets.Scripts.Units.Missiles;
+using Assets.VisualEffects;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
     public class WeaponLazer : WeaponBase
     {
-        public WeaponLazer(WeaponSettings settings) : base (settings)
+        public WeaponLazer(MissileFactory missileFactory, VisualEffectFactory visualEffectFactory) : base(missileFactory, visualEffectFactory)
         {
-           
+
         }
 
         public override bool Shoot(Vector2 weaponPosition, Quaternion rotation, float attackDamage, UnitTeam team)
@@ -19,15 +20,13 @@ namespace Assets.Scripts.Weapons
             {
                 _shootCooldown = _settings.AttackCooldown;
 
-                Vector2 direction = GameMaths.DegreeToVector2(rotation.eulerAngles.z); 
+                Vector2 direction = GameMaths.DegreeToVector2(rotation.eulerAngles.z);
                 Vector2 missilePosition = weaponPosition + direction;
-                UnitBase missile = ObjectManager.Instanse.InstantiatePrefab(_settings.PrefabMissile, missilePosition, rotation);
-                missile.SetUnitTeam(team);
-
+                UnitBase missile = _missileFactory.Create(_settings.PrefabMissile, missilePosition, rotation, null, team);
 
                 if (_settings.PrefabShootEffect != null)
                 {
-                    ObjectManager.Instanse.InstantiatePrefab(_settings.PrefabShootEffect, missilePosition, rotation);
+                    _visualEffectFactory.Create(_settings.PrefabShootEffect, missilePosition, rotation, null);
                 }
 
                 return true;

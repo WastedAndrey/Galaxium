@@ -11,6 +11,7 @@ namespace Assets.Scripts.Units.Components
         {
             _weapon = weapon;
         }
+
         public override void Update(float deltaTime) 
         {
             _weapon.Update(deltaTime, _context.AttackSpeed);
@@ -20,5 +21,7 @@ namespace Assets.Scripts.Units.Components
         {
             _weapon.Shoot(_unit.Position, _unit.Rotation, _context.AttackDamage, _context.Team);
         }
+
+        
     }
 }

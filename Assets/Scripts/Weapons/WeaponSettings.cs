@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Units;
 using Assets.Scripts.Units.Missiles;
+using Assets.VisualEffects;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -10,12 +11,12 @@ namespace Assets.Scripts.Weapons
         [SerializeField]
         private UnitBase _prefabMissile;
         [SerializeField]
-        private UnitBase _prefabShootEffect;
+        private VisualEffectBase _prefabShootEffect;
         [SerializeField]
         private float _attackCooldown;
 
         public UnitBase PrefabMissile { get => _prefabMissile; }
-        public UnitBase PrefabShootEffect { get => _prefabShootEffect; }
+        public VisualEffectBase PrefabShootEffect { get => _prefabShootEffect; }
         public float AttackCooldown { get => _attackCooldown; }
     }
 }

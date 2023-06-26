@@ -15,6 +15,7 @@ namespace Assets.Scripts.UI.Views
             Disabled
         }
 
+        private ObjectManager _objectManager;
         protected T _viewModel;
         protected AssetLoader _assetLoader;
 
@@ -81,7 +82,7 @@ namespace Assets.Scripts.UI.Views
             if (_assetLoader != null)
                 _assetLoader.Unload();
             else
-                ObjectManager.Instanse.DestroyObject(this.gameObject);
+                _objectManager.DestroyObject(this.gameObject);
             
         }
         protected async virtual Task CloseProcess() { }

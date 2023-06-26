@@ -9,6 +9,7 @@ namespace Assets.Scripts.UI.Views
 {
     public class MainMenuView : View<IMainMenuViewModel>
     {
+        private ObjectManager _objectManager;
         [Header("Prefabs")]
         [SerializeField]
         private ButtonView _prefabLevelButton;
@@ -34,7 +35,7 @@ namespace Assets.Scripts.UI.Views
         }
         private void CreateButton(int buttonIndex)
         {
-            ButtonView newButton = ObjectManager.Instanse.InstantiatePrefab<ButtonView>(_prefabLevelButton);
+            ButtonView newButton = _objectManager.InstantiatePrefab<ButtonView>(_prefabLevelButton);
             newButton.Init(_viewModel.GetButtonViewModel(buttonIndex));
             newButton.Clicked += ButtonClicked;
             newButton.transform.SetParent(_levelButtonsParent);

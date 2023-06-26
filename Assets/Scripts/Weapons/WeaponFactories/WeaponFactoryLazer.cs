@@ -8,7 +8,9 @@ namespace Assets.Scripts.Weapons.WeaponFactories
     {
         public override WeaponBase Create()
         {
-            return new WeaponLazer(_settings);
+            var newWeapon  = _diContainer.Instantiate<WeaponLazer>();
+            newWeapon.Init(_settings);
+            return newWeapon;
         }
     }
 }

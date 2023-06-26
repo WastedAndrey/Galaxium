@@ -1,5 +1,7 @@
 using Assets.Scripts.GameManagement.GameStates;
+using Assets.Scripts.GameManagement.GameStates.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.GameManagement
 {
@@ -12,17 +14,14 @@ namespace Assets.Scripts.GameManagement
         private GameContext _context;
         private GameStateBase _state;
 
-        private void Awake()
-        {
-            if (_instance == null)
-                Init();
-            else
-                Destroy(this.gameObject);
-        }
 
-        private void Start()
+        [Inject]
+        private MainMenuStateFactory _mainMenuStateFactory;
+
+
+        private void Start1(bool bla)
         {
-            _state = new MainMenuState(_context);
+            _state = _mainMenuStateFactory.Create(_context);
             _state.Enter();
         }
 

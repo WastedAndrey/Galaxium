@@ -7,6 +7,8 @@ namespace Assets.Scripts.Units.Components
 {
     public class DestroyApplyerComponent : UnitComponentBase
     {
+        ObjectManager _objectManager;
+
         public DestroyApplyerComponent(UnitBase unit, UnitContext unitContext) : base(unit, unitContext)
         {
         }
@@ -22,7 +24,7 @@ namespace Assets.Scripts.Units.Components
         private void Destroy(BoolData destroyData)
         {
             if (destroyData.FinalValue)
-                ObjectManager.Instanse.DestroyObject(_unit.gameObject);
+                _objectManager.DestroyObject(_unit.gameObject);
         }  
     }
 }
